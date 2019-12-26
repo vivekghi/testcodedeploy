@@ -12,10 +12,10 @@ workflows:
           bundle-key: tco-backend
           bundle-source: build/
           deployment-group: rbk-tco-backend-dg
+          service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
           filters: 
             branches: 
-              only: dev
-          service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
+              only: dev          
       - 
         aws-code-deploy/deploy: 
           application-name: rbk-tco-backend
@@ -23,7 +23,7 @@ workflows:
           bundle-key: tco-backend
           bundle-source: build/
           deployment-group: rbk-tco-backend-dg
+          service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
           filters: 
             branches: 
-              only: qa
-          service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
+              only: qa         
