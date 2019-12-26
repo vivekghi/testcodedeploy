@@ -15,7 +15,7 @@ workflows:
           service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
           filters: 
             branches: 
-              only: dev          
+              only: master          
       - 
         aws-code-deploy/deploy: 
           application-name: rbk-tco-backend
