@@ -7,11 +7,11 @@ workflows:
     jobs: 
       - 
         aws-code-deploy/deploy: 
-          application-name: rbk-tco-backend
+          application-name: rbk-tco-backend-master
           bundle-bucket: tco-app
           bundle-key: tco-backend
           bundle-source: build/
-          deployment-group: rbk-tco-backend-dg
+          deployment-group: rbk-tco-backend-dg-master
           service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
           filters: 
             branches: 
