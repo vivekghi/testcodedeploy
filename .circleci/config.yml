@@ -1,33 +1,29 @@
-version: 2.1
+--- 
 orbs: 
   aws-code-deploy: circleci/aws-code-deploy@0.0.10
-  jobs: 
-    - aws-code-deploy/Devdeploy: 
-        application-name: demoapp-dev
-        bundle-bucket: angular-bucket-17
-        bundle-key: dev1
-        bundle-source: Build/
-        deployment-group: SimpleDemoDG
-        service-role-arn: "arn:aws:iam::801391952744:role/CodeDeployServiceRole"
-  
-    - aws-code-deploy/QAdeploy: 
-        application-name: demoapp-qa
-        bundle-bucket: myApplicationS3Bucket
-        bundle-key: qa1
-        bundle-source: Build/
-        deployment-group: ~
-        service-role-arn: "arn:aws:iam::801391952744:role/CodeDeployServiceRole"
-
- 
-
+version: 2.1
 workflows: 
   deploy_application: 
-  jobs: 
-    - aws-code-deploy/Devdeploy:  
-        filters: 
-          branches: 
-              only: master
-    - aws-code-deploy/QAdeploy: 
-        filters: 
-          branches: 
-              only: build-issues
+    jobs: 
+      - 
+        aws-code-deploy/deploy: 
+          application-name: rbk-tco-backend
+          bundle-bucket: tco-app
+          bundle-key: tco-backend
+          bundle-source: build/
+          deployment-group: rbk-tco-backend-dg
+          filters: 
+            branches: 
+              only: dev
+          service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
+      - 
+        aws-code-deploy/deploy: 
+          application-name: rbk-tco-backend
+          bundle-bucket: tco-app
+          bundle-key: tco-backend
+          bundle-source: build/
+          deployment-group: rbk-tco-backend-dg
+          filters: 
+            branches: 
+              only: qa
+          service-role-arn: "arn:aws:iam::688687378425:role/CodeDeployEC2ServiceRole"
