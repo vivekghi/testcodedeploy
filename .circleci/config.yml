@@ -1,34 +1,17 @@
---- 
-jobs: 
-  dev-job: 
-    - 
-      aws-code-deploy/deploy: 
-        application-name: myApplication
-        bundle-bucket: angular-bucket-17
-        bundle-key: myS3BucketKey
-        deployment-group: myDeploymentGroup1
-        service-role-arn: "arn:aws:iam::801391952744:role/CodeDeployServiceRole-new"
-  qa-job: 
-    - 
-      aws-code-deploy/deploy: 
-        application-name: myApplication
-        bundle-bucket: angular-bucket-17
-        bundle-key: myS3BucketKey
-        deployment-group: myDeploymentGroup2
-        service-role-arn: "arn:aws:iam::801391952744:role/CodeDeployServiceRole-new"
+version: 2.1
 orbs: 
   aws-code-deploy: circleci/aws-code-deploy@1.0.0
-version: 2.1
+
 workflows: 
   deploy_application_dev: 
     jobs: 
       - 
-        dev-job: 
-          filters: 
-            branches: 
-              only: dev
-      - 
-        qa-job: 
-          filters: 
-            branches: 
-              only: dev
+        aws-code-deploy/deploy: 
+			application-name: myApplication
+			bundle-bucket: angular-bucket-17
+			bundle-key: myS3BucketKey
+			deployment-group: myDeploymentGroup1
+			service-role-arn: "arn:aws:iam::801391952744:role/CodeDeployServiceRole-new"
+			filters: 
+				branches: 
+				  only: dev
